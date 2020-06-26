@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetECoremmerce.ProductCatalogue.API.Model;
+using Interview.API.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
@@ -13,27 +15,21 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private static readonly string[] Products = new[]
-        {
-            "Product1", "Product2", "Product3", "Product4"
-        };
-
+        private readonly ProductCatalogueContext _context;
         private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(ILogger<ProductsController> logger)
+        public ProductsController(ILogger<ProductsController> logger, ProductCatalogueContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public async Task<Product[]> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Product
-            {
-                Name = Products[rng.Next(Products.Length)]
-            })
-            .ToArray();
+
+            return await _context.Products.ToArrayAsync();
+
         }
     }
 }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.Test", "DotNetECoremmerce.Test\DotNetECoremmerce.Test.csproj", "{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.ProductCatalogue.UnitTests", "ProductCatalogue\DotNetECoremmerce.ProductCatalogue.UnitTests\DotNetECoremmerce.ProductCatalogue.UnitTests.csproj", "{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.ProductCatalogue.API", "DotNetECoremmerce.ProductCatalogue.API\DotNetECoremmerce.ProductCatalogue.API.csproj", "{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.ProductCatalogue.API", "ProductCatalogue\DotNetECoremmerce.ProductCatalogue.API\DotNetECoremmerce.ProductCatalogue.API.csproj", "{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
