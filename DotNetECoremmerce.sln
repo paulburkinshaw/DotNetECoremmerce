@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.WebMVC", "DotNetECoremmerce.WebMVC\DotNetECoremmerce.WebMVC.csproj", "{30C81298-09DE-47C5-83CF-3CCA7C2508E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.Test", "DotNetECoremmerce.Test\DotNetECoremmerce.Test.csproj", "{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetECoremmerce.Test", "DotNetECoremmerce.Test\DotNetECoremmerce.Test.csproj", "{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetECoremmerce.API", "DotNetECoremmerce.API\DotNetECoremmerce.API.csproj", "{6411678B-16FA-469D-A902-DAB83B23B4CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.ProductCatalogue.API", "DotNetECoremmerce.ProductCatalogue.API\DotNetECoremmerce.ProductCatalogue.API.csproj", "{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +13,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{30C81298-09DE-47C5-83CF-3CCA7C2508E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30C81298-09DE-47C5-83CF-3CCA7C2508E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30C81298-09DE-47C5-83CF-3CCA7C2508E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30C81298-09DE-47C5-83CF-3CCA7C2508E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		
 		{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6411678B-16FA-469D-A902-DAB83B23B4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6411678B-16FA-469D-A902-DAB83B23B4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6411678B-16FA-469D-A902-DAB83B23B4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6411678B-16FA-469D-A902-DAB83B23B4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
