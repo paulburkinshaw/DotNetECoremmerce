@@ -1,6 +1,7 @@
 import { RootModel } from "."
 import { onSnapshot, getSnapshot, applySnapshot } from "mobx-state-tree";
 
+import makeInspectable from 'mobx-devtools-mst';
 
 export const setupRootStore = () => {
     
@@ -9,6 +10,8 @@ export const setupRootStore = () => {
             products: []
         }
     });
+
+    makeInspectable(rootTree);
 
     onSnapshot(rootTree, (snapshot) => console.log('snapshot: ', snapshot))
 
