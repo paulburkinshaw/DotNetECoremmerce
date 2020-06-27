@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace DotNetECoremmerce.ProductCatalogue.API
 {
@@ -32,6 +33,25 @@ namespace DotNetECoremmerce.ProductCatalogue.API
             var connectionString = Configuration.GetConnectionString("ProductCatalogueContext");
 
             services.AddDbContext<ProductCatalogueContext>(options => options.UseSqlServer(connectionString));
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            // services.AddSwaggerGen();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Product Catalogue API",
+                    Description = "API for the DotNet eCoremmerce product catalogue",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +73,16 @@ namespace DotNetECoremmerce.ProductCatalogue.API
             }
 
             app.UseHttpsRedirection();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product Catalogue API V1");
+            });
 
             app.UseRouting();
 
