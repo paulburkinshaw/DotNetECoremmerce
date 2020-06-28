@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetECoremmerce.ProductCatalogue.API.Model;
 using Interview.API.Data;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
             _context = context;
         }
 
+        [EnableCors()]
         [HttpGet]
         public async Task<Product[]> Get()
         {
