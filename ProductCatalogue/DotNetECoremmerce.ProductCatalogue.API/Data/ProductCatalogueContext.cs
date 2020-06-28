@@ -17,22 +17,10 @@ namespace Interview.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /* modelBuilder.Entity<Product>()
-                .Property(p => p.Inserted)
-                .ValueGeneratedOnAdd(); */
+            
         }
 
 
     }
 
-    /* public class ProductCatalogueContextDesignFactory : IDesignTimeDbContextFactory<ProductCatalogueContext>
-    {
-        public ProductCatalogueContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<ProductCatalogueContext>()
-                .UseSqlServer("Server=localhost;Database=ProductCatalogueDb;User Id=sa;Password=BigPassw0rd");
-
-            return new ProductCatalogueContext(optionsBuilder.Options);
-        }
-    } */
 }
