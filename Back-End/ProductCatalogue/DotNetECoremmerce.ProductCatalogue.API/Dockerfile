@@ -5,8 +5,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 # WORKDIR /src
-COPY ./DotNetECoremmerce.ProductCatalogue.API.csproj ./ProductCatalogue/DotNetECoremmerce.ProductCatalogue.API/
-WORKDIR "/ProductCatalogue/DotNetECoremmerce.ProductCatalogue.API"
+COPY ./DotNetECoremmerce.ProductCatalogue.API.csproj ./Back-End/ProductCatalogue/DotNetECoremmerce.ProductCatalogue.API/
+WORKDIR "/Back-End/ProductCatalogue/DotNetECoremmerce.ProductCatalogue.API"
 RUN dotnet restore 
 
 COPY . .
