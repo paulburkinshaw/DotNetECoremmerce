@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DotNetECoremmerce.ProductCatalogue.API.Configuration;
 using Interview.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace DotNetECoremmerce.ProductCatalogue.API
@@ -31,6 +26,16 @@ namespace DotNetECoremmerce.ProductCatalogue.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            var appSettings = new AppSettings();
+ 
+            Configuration.GetSection("DotNetECoremmerce:ProductCatalogue:ConnectionStrings").Bind(appSettings.ConnectionStrings);
+            Configuration.GetSection("DotNetECoremmerce:ProductCatalogue:ApiSettings").Bind(appSettings.ApiSettings);
+
+            services.AddSingleton(appSettings);
+
+            services.AddScoped<IConfigurationService, ConfigurationService>();
+
+
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -42,13 +47,10 @@ namespace DotNetECoremmerce.ProductCatalogue.API
 
             services.AddControllers();
 
-            var connectionString = Configuration.GetConnectionString("ProductCatalogueContext");
-
+            var connectionString = Configuration["DotNetECoremmerce:ProductCatalogue:ConnectionStrings:ProductCatalogueContext"];
             services.AddDbContext<ProductCatalogueContext>(options => options.UseSqlServer(connectionString));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
-            // services.AddSwaggerGen();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
