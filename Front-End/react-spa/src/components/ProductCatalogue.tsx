@@ -36,16 +36,18 @@ class ProductCatalogueComponent extends React.Component<ProductCatalogueComponen
                 <hr />
 
                 <table>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Description</th>
-                        <th>Product Price</th>
-                    </tr>
-
-                    {products.map(product => (
-                        <ProductComponent product={product} key={product.id} />
-                    ))}
-
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Description</th>
+                            <th>Product Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products.map(product => (
+                            <ProductComponent product={product} key={product.id} />
+                        ))}
+                    </tbody>
                 </table>
             </div>
         )

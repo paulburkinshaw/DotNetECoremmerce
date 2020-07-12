@@ -6,6 +6,11 @@ import makeInspectable from 'mobx-devtools-mst';
 export const setupRootStore = () => {
     
     const rootTree = RootModel.create({
+        auth: {
+            auth0: {},
+            accessToken: '',
+            loading: true
+        },
         productCatalogue: {
             products: []
         }
