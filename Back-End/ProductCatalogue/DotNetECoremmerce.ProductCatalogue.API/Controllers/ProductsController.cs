@@ -44,14 +44,21 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
         }
 
         [EnableCors()]
-        [HttpPost("{id}")]
+        [HttpPut("{id}")]
         public async Task<Product> UpdateProduct(int id, Product product)
-        {
-            var modifiedProduct = await _context.Products.FindAsync(id);
+        { 
+            try
+            {
+                // Below updates every property regardless of whether the values have changed
+                _context.Products.Update(product);
+                 await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
 
-            // TODO: Update product 
-
-            return modifiedProduct;
+            return product;
         }
     }
 }
