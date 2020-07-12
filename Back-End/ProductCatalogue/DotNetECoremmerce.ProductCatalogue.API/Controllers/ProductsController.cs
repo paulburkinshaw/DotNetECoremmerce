@@ -21,7 +21,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
         private readonly ProductCatalogueContext _context;
         private readonly ILogger<ProductsController> _logger;
         private readonly IConfigurationService _configurationService;
-        
+
         public ProductsController(ILogger<ProductsController> logger, ProductCatalogueContext context, IConfigurationService configurationService)
         {
             _logger = logger;
@@ -31,10 +31,27 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
 
         [EnableCors()]
         [HttpGet]
-        public async Task<Product[]> Get()
+        public async Task<Product[]> GetAllProducts()
         {
             return await _context.Products.ToArrayAsync();
+        }
 
+        [EnableCors()]
+        [HttpGet("{id}")]
+        public async Task<Product> GetProductById(int id)
+        {
+            return await _context.Products.FindAsync(id);
+        }
+
+        [EnableCors()]
+        [HttpPost("{id}")]
+        public async Task<Product> UpdateProduct(int id, Product product)
+        {
+            var modifiedProduct = await _context.Products.FindAsync(id);
+
+            // TODO: Update product 
+
+            return modifiedProduct;
         }
     }
 }
