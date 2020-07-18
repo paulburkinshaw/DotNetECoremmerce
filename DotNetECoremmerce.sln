@@ -7,13 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.ProductCa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetECoremmerce.ProductCatalogue.API", "Back-End\ProductCatalogue\DotNetECoremmerce.ProductCatalogue.API\DotNetECoremmerce.ProductCatalogue.API.csproj", "{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetECoremmerce.ProductCatalogue.fn", "Back-End\ProductCatalogue\DotNetECoremmerce.ProductCatalogue.fn\DotNetECoremmerce.ProductCatalogue.fn.csproj", "{330CB93C-A9CA-4B95-A2D4-1196B1D48522}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		
 		{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C323E05-45A1-4522-ADC1-5FCF21B2A9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -22,6 +23,10 @@ Global
 		{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1F37229-B7DD-4C82-9F7A-2F82B06FBD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330CB93C-A9CA-4B95-A2D4-1196B1D48522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330CB93C-A9CA-4B95-A2D4-1196B1D48522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330CB93C-A9CA-4B95-A2D4-1196B1D48522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330CB93C-A9CA-4B95-A2D4-1196B1D48522}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
