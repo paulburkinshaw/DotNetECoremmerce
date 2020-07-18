@@ -1,12 +1,18 @@
 import React from 'react';
+import { Route } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import logo from './logo.svg';
 import './App.css';
 import { setupRootStore } from './mst/setup';
 import { ProductCatalogueComponent } from './components/ProductCatalogue';
+import { AuthComponent } from './components/Auth';
+import { LoginComponent } from './components/Login';
+import CallBackComponent from './components/Callback';
+
 
 interface Props {
-  
+
 }
 
 interface State {
@@ -36,8 +42,21 @@ class App extends React.Component<Props, State> {
     if (!rootTree) return null;
 
     return (
-     <Provider rootTree={rootTree}>
-        <ProductCatalogueComponent />
+      <Provider rootTree={rootTree}>
+        <BrowserRouter>
+          <AuthComponent />
+          <ProductCatalogueComponent />
+          <Route
+            exact
+            path='/login'
+            render={() => <LoginComponent />}
+          />
+           <Route
+            exact
+            path='/callback'
+              render={() => <CallBackComponent />}
+          />
+        </BrowserRouter>
       </Provider>
     );
   }

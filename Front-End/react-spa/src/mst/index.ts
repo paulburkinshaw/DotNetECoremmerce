@@ -2,6 +2,33 @@ import { types, Instance, applySnapshot, flow, onSnapshot } from 'mobx-state-tre
 import { values } from "mobx"
 import api from 'axios';
 
+const AuthModel = types.model("Auth", {
+    auth0: types.maybe(types.frozen()),
+    accessToken: types.string,
+    loading: types.boolean
+})
+    .actions(self => ({
+
+        initialize(auth0) {
+            applySnapshot(self,
+                {
+                    ...self, auth0: auth0
+                });
+        },
+        setLoading(loading) {
+            applySnapshot(self,
+                {
+                    ...self, loading: loading
+                });
+        },
+        setAuth(token: string) {
+            applySnapshot(self,
+                {
+                    ...self, accessToken: token
+                });
+        }
+
+    }))
 
 const ProductModel = types.model("Product", {
     id: types.integer,
@@ -22,8 +49,10 @@ export const ProductCatalogueModel = types.model("ProductCatalogue", {
         fetchProductsFromApi: flow(function* fetchProductsFromApi() {
 
             try {
-               
-                const response = yield api.get('https://localhost:5001/api/v1/products');
+
+                let product_catalogue_api_url: string = process.env.REACT_APP_PRODUCT_CATOLOGUE_API_URL ? process.env.REACT_APP_PRODUCT_CATOLOGUE_API_URL : '';
+
+                const response = yield api.get(product_catalogue_api_url);
 
                 const responseJson = response.data;
 
@@ -52,7 +81,8 @@ export const ProductCatalogueModel = types.model("ProductCatalogue", {
 
 
 const RootModel = types.model("Root", {
-    productCatalogue: ProductCatalogueModel
+    auth: AuthModel,
+    productCatalogue: ProductCatalogueModel   
 });
 
 export { RootModel };
@@ -60,4 +90,5 @@ export { RootModel };
 export type Root = Instance<typeof RootModel>;
 export type ProductCatalogue = Instance<typeof ProductCatalogueModel>;
 export type Product = Instance<typeof ProductModel>;
+export type Auth = Instance<typeof AuthModel>;
 

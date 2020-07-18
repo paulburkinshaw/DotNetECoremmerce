@@ -6,7 +6,7 @@ services:
     image: dotnetecoremmerceproductcatalogue
     build:
       context: .
-      dockerfile: ProductCatalogue/DotNetECoremmerce.ProductCatalogue.API/Dockerfile
+      dockerfile: Back-End/ProductCatalogue/DotNetECoremmerce.ProductCatalogue.API/Dockerfile
     ports:
       - 80
     environment:
