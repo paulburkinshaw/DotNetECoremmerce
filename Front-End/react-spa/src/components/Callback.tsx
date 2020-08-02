@@ -1,11 +1,12 @@
 import * as React from "react";
 import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
-import { History, LocationState } from "history";
 import { observer, inject } from "mobx-react";
+import createAuth0Client from '@auth0/auth0-spa-js';
+import { History, LocationState } from "history";
+
 import { Root } from "../mst";
 
-import createAuth0Client from '@auth0/auth0-spa-js';
 
 interface CallBackComponentProps extends RouteComponentProps {
     rootTree?: Root;
@@ -35,6 +36,7 @@ class CallBackComponent extends React.Component<CallBackComponentProps, CallBack
 
         await rootTree.auth.auth0.handleRedirectCallback();
         let token = await rootTree.auth.auth0.getTokenSilently();
+        
         rootTree.auth.setAuth(token);
         this.props.history.push('/');
 

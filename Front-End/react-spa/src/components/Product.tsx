@@ -11,6 +11,7 @@ interface ProductComponentState {
     name: string;
     description: string;
     price: string;
+    category: string;
 }
 
 @inject("rootTree")
@@ -23,19 +24,23 @@ class ProductComponent extends React.Component<ProductComponentProps, ProductCom
         this.state = {
             name: this.props.product.name,
             description: `${this.props.product.description}`,
+            category: `${this.props.product.category}`,
             price: `${this.props.product.price}`
         };
 
     }
 
     render() {
-        const { name, description, price } = this.props.product;
+        const { name, description, category, price } = this.props.product;
 
         return (
 
             <tr>
                 <td>
                     {`${name}`}
+                </td>
+                <td>
+                    {`${category}`}
                 </td>
                 <td>
                     {`${description}`}

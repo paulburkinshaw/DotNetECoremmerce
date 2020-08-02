@@ -5,7 +5,8 @@ import api from 'axios';
 const AuthModel = types.model("Auth", {
     auth0: types.maybe(types.frozen()),
     accessToken: types.string,
-    loading: types.boolean
+    loading: types.boolean,
+    authenticated: types.boolean
 })
     .actions(self => ({
 
@@ -24,7 +25,7 @@ const AuthModel = types.model("Auth", {
         setAuth(token: string) {
             applySnapshot(self,
                 {
-                    ...self, accessToken: token
+                    ...self, accessToken: token, authenticated: true 
                 });
         }
 
@@ -34,19 +35,45 @@ const ProductModel = types.model("Product", {
     id: types.integer,
     name: types.string,
     description: types.string,
+    category: types.string,
     price: types.number
 })
 
-export const ProductCatalogueModel = types.model("ProductCatalogue", {
-    // products: types.map(ProductModel) // types.array(ProductModel)
+const ProductCatalogueModel = types.model("ProductCatalogue", {
     products: types.array(ProductModel)
 })
-    .actions(self => ({
+    .actions(self => {
+        function newProduct(name: string, description: string, category: string, price: number, bearerToken: string) {
+            const id =0;
+            applySnapshot(self,
+                {
+                    ...self, products: [{ id, name, description, category, price }, ...self.products]
+                });
 
-        afterCreate() {
-            this.fetchProductsFromApi()
-        },
-        fetchProductsFromApi: flow(function* fetchProductsFromApi() {
+            saveProduct({ id, name, description, category, price, }, bearerToken);
+        }
+        const saveProduct = flow(function* saveProduct(snapshot: any, bearerToken) {
+            let product_catalogue_api_url: string = process.env.REACT_APP_PRODUCT_CATOLOGUE_API_URL ? process.env.REACT_APP_PRODUCT_CATOLOGUE_API_URL : '';
+
+            try {
+
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': bearerToken
+                }
+
+                const response = yield api.post(product_catalogue_api_url, snapshot, { headers: headers });
+
+            } catch (e) {
+                console.log('error:', e);
+            }
+        })
+        function afterCreate() {
+
+            fetchProductsFromApi();
+
+        }
+        const fetchProductsFromApi = flow(function* fetchProductsFromApi() {
 
             try {
 
@@ -60,6 +87,7 @@ export const ProductCatalogueModel = types.model("ProductCatalogue", {
                     return {
                         id: productJson.id,
                         name: productJson.name,
+                        category: productJson.category ?  productJson.category: '',
                         description: productJson.description ? productJson.description : '',
                         price: productJson.price
                     }
@@ -71,8 +99,8 @@ export const ProductCatalogueModel = types.model("ProductCatalogue", {
                 console.error("Failed to fetch products", error)
             }
         })
-
-    }))
+        return { newProduct, fetchProductsFromApi, afterCreate, saveProduct };
+    })
     .views(self => ({
         getProducts() {
             return self.products;

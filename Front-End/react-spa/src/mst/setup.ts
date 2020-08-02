@@ -9,7 +9,8 @@ export const setupRootStore = () => {
         auth: {
             auth0: {},
             accessToken: '',
-            loading: true
+            loading: true,
+            authenticated: false
         },
         productCatalogue: {
             products: []

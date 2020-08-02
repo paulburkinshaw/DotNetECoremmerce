@@ -30,9 +30,10 @@ class AuthComponent extends React.Component<AuthComponentProps, AuthComponentSta
         if (!rootTree) return null;
 
         let auth0 = await createAuth0Client({
-            domain: process.env.REACT_APP_DOMAIN ? process.env.REACT_APP_DOMAIN : '',
-            client_id: process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : '',
-            redirect_uri: process.env.REACT_APP_REDIRECT_URI ? process.env.REACT_APP_REDIRECT_URI : '',
+            domain: process.env.REACT_APP_AUTH0_DOMAIN ? process.env.REACT_APP_AUTH0_DOMAIN : '',
+            client_id: process.env.REACT_APP_AUTH0_CLIENT_ID ? process.env.REACT_APP_AUTH0_CLIENT_ID : '',
+            redirect_uri: process.env.REACT_APP_AUTH0_REDIRECT_URI ? process.env.REACT_APP_AUTH0_REDIRECT_URI : '',
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE ? process.env.REACT_APP_AUTH0_AUDIENCE : '', // setting audience tells Auth0 to send back an Access Token
             responseType: 'token id_token',
             scope: 'openid profile'
         });

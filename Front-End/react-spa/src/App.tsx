@@ -4,12 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import logo from './logo.svg';
 import './App.css';
+
 import { setupRootStore } from './mst/setup';
-import { ProductCatalogueComponent } from './components/ProductCatalogue';
+import ProductCatalogueComponent from './components/ProductCatalogue';
 import { AuthComponent } from './components/Auth';
 import { LoginComponent } from './components/Login';
 import CallBackComponent from './components/Callback';
-
 
 interface Props {
 
@@ -21,6 +21,7 @@ interface State {
 
 
 class App extends React.Component<Props, State> {
+
   constructor(props: Props) {
     super(props);
 
@@ -45,7 +46,11 @@ class App extends React.Component<Props, State> {
       <Provider rootTree={rootTree}>
         <BrowserRouter>
           <AuthComponent />
-          <ProductCatalogueComponent />
+          <Route
+            exact
+            path='/'
+            render={() => <ProductCatalogueComponent />}
+          />
           <Route
             exact
             path='/login'
