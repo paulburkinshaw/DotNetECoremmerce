@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DotNetECoremmerce.ProductCatalogue.API.Configuration;
 using DotNetECoremmerce.ProductCatalogue.API.Model;
 using Interview.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
 
         [EnableCors()]
         [HttpPut("{id}")]
+        [Authorize("CanEditProducts")]
         public async Task<Product> UpdateProduct(int id, Product product)
         {
             try
@@ -65,6 +67,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
 
         [EnableCors()]
         [HttpPost]
+        [Authorize("CanEditProducts")]
         public async Task<Product> AddProduct(Product product)
         {
             try

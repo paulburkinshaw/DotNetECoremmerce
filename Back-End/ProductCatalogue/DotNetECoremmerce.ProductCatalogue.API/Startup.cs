@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Net.Http.Headers;
+using DotNetECoremmerce.ProductCatalogue.API.Auth;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetECoremmerce.ProductCatalogue.API
 {
@@ -27,7 +31,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API
         {
 
             var appSettings = new AppSettings();
- 
+
             Configuration.GetSection("DotNetECoremmerce:ProductCatalogue:ConnectionStrings").Bind(appSettings.ConnectionStrings);
             Configuration.GetSection("DotNetECoremmerce:ProductCatalogue:ApiSettings").Bind(appSettings.ApiSettings);
 
@@ -41,7 +45,10 @@ namespace DotNetECoremmerce.ProductCatalogue.API
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000", "http://localhost:3000/*");
+                        builder.WithOrigins("http://localhost:3000", "http://localhost:3000/*")
+                        .WithHeaders(HeaderNames.Authorization, HeaderNames.ContentType)
+                        .AllowAnyMethod();
+
                     });
             });
 
@@ -66,6 +73,31 @@ namespace DotNetECoremmerce.ProductCatalogue.API
                     }
                 });
             });
+
+
+            // 1. Add Authentication Services
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["DotNetECoremmerce:ProductCatalogue:Auth0Settings:Authority"];
+                options.Audience = Configuration["DotNetECoremmerce:ProductCatalogue:Auth0Settings:Audience"];
+            });
+
+            // 2. Add Authorization
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "CanEditProducts",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new ProductsAdminRequirement()
+                    )
+                );
+            });
+
+            services.AddSingleton<IAuthorizationHandler, ProductsAdminHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,6 +137,10 @@ namespace DotNetECoremmerce.ProductCatalogue.API
             // redirect HTTP requests to HTTPS
             app.UseHttpsRedirection();
 
+            // Enable authentication middleware
+            app.UseAuthentication();
+
+            // Enable authorization middleware
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
