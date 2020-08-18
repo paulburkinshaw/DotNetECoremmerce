@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using DotNetECoremmerce.ProductCatalogue.API.Model;
-/* using Microsoft.EntityFrameworkCore.InMemory; */
+using DotNetECoremmerce.ProductCatalogue.API.Configuration;
 
 namespace DotNetECoremmerce.ProductCatalogue.UnitTests
 {
-    public class ProductControllerTest
+    public class ProductControllerTests
     {
         private readonly DbContextOptions<ProductCatalogueContext> _dbOptions;
 
-        public ProductControllerTest()
+        public ProductControllerTests()
         {
             _dbOptions = new DbContextOptionsBuilder<ProductCatalogueContext>()
             .UseInMemoryDatabase(databaseName: "ProductCatalogueDb_InMemory").Options;
@@ -35,16 +35,17 @@ namespace DotNetECoremmerce.ProductCatalogue.UnitTests
         }
 
         [Test]
-        public async Task Get_products_Should_return_correct_products()
+        public async Task GetAllProducts_Should_return_correct_products()
         {
 
             var inMemoryproductCatalogueContext = new ProductCatalogueContext(_dbOptions);
             var loggerMock = new Mock<ILogger<ProductsController>>();
+            var configurationServiceMock = new Mock<IConfigurationService>();
 
-            var productsController = new ProductsController(loggerMock.Object, inMemoryproductCatalogueContext);
+            var productsController = new ProductsController(loggerMock.Object, inMemoryproductCatalogueContext, configurationServiceMock.Object);
 
             int expectedCount = 6;
-            var result = await productsController.Get();
+            var result = await productsController.GetAllProducts();
             var resultCount = result.Count();
 
             Assert.AreEqual(expectedCount, resultCount);
