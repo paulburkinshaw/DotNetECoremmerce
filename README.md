@@ -8,6 +8,7 @@ It will also the basis for a number of upcoming [understanding_software](https:/
 * [.NET Core 3.1](https://dotnet.microsoft.com/download)
 * [ASP.NET Core 3.1](https://docs.microsoft.com/en-us/aspnet/core)
 * [Entity Framework Core 3.1](https://docs.microsoft.com/en-us/ef/core)
+* [SQL Server 2019](https://www.microsoft.com/en-gb/sql-server/sql-server-2019)
 * [C# 8.0](https://docs.microsoft.com/en-us/dotnet/csharp)
 * [React](https://https://reactjs.org/)
 * [MobX-state-tree](https://mobx-state-tree.js.org/)
