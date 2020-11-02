@@ -45,16 +45,12 @@ class App extends React.Component<Props, State> {
     return (
       <Provider rootTree={rootTree}>
         <BrowserRouter>
+          <LoginComponent />
           <AuthComponent />
           <Route
             exact
             path='/'
             render={() => <ProductCatalogueComponent />}
-          />
-          <Route
-            exact
-            path='/login'
-            render={() => <LoginComponent />}
           />
            <Route
             exact

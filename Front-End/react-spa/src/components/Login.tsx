@@ -24,6 +24,15 @@ class LoginComponent extends React.Component<LoginComponentProps, LoginComponent
         };
     }
 
+    OnLoginButtonClick = (rootTree: any) => {
+        if(!rootTree.auth.authenticated){
+            rootTree.auth.auth0.loginWithRedirect();
+        } else{
+            rootTree.auth.auth0.logout();
+            rootTree.auth.setAuth(null, false);
+        }
+    }
+
     render() {
         const { rootTree } = this.props;
         if (!rootTree) return null;
@@ -32,9 +41,10 @@ class LoginComponent extends React.Component<LoginComponentProps, LoginComponent
             <div className='row'>
                 <div className='col-md-4 offset-md-4'>
                     <div className='login'>
-                        <button disabled={rootTree.auth.loading} className='btn btn-primary' onClick={() => rootTree.auth.auth0.loginWithRedirect()}>
-                            {rootTree.auth.loading ? <i className="fa fa-gear fa-spin" /> : null} Login
-                  </button>
+                        <button disabled={rootTree.auth.loading} className='btn btn-primary' onClick={() => this.OnLoginButtonClick(rootTree)}>
+                            {rootTree.auth.loading ? <i className="fa fa-gear fa-spin" /> : null} 
+                            {!rootTree.auth.authenticated ? <span>Login</span> : <span>Logout</span>} 
+                        </button>
                     </div>
                 </div>
             </div>

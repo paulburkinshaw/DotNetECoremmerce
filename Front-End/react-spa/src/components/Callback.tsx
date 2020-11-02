@@ -37,7 +37,7 @@ class CallBackComponent extends React.Component<CallBackComponentProps, CallBack
         await rootTree.auth.auth0.handleRedirectCallback();
         let token = await rootTree.auth.auth0.getTokenSilently();
         
-        rootTree.auth.setAuth(token);
+        rootTree.auth.setAuth(token, true);
         this.props.history.push('/');
 
     }

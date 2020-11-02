@@ -1,8 +1,9 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
-import { Root } from "../mst";
 
 import createAuth0Client from '@auth0/auth0-spa-js';
+
+import { Root } from "../mst";
 
 interface AuthComponentProps {
     rootTree?: Root;
@@ -41,12 +42,18 @@ class AuthComponent extends React.Component<AuthComponentProps, AuthComponentSta
         rootTree.auth.initialize(auth0);
         rootTree.auth.setLoading(false);
 
+        if (rootTree.auth.authenticated) {
+            let token = await rootTree.auth.auth0.getTokenSilently();
+            if (token) {
+                rootTree.auth.setAuth(token, true);
+            }    
+        }
+        
+
     }
 
    
     render() {
-
-
         return null
     }
 }

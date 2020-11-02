@@ -19,7 +19,7 @@ export const setupRootStore = () => {
 
     makeInspectable(rootTree);
 
-    onSnapshot(rootTree, (snapshot) => console.log('snapshot: ', snapshot))
+    // onSnapshot(rootTree, (snapshot) => console.log('snapshot: ', snapshot))
 
     return { rootTree };
 };

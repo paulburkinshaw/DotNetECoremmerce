@@ -22,10 +22,10 @@ const AuthModel = types.model("Auth", {
                     ...self, loading: loading
                 });
         },
-        setAuth(token: string) {
+        setAuth(token: string, authenticated: boolean) {
             applySnapshot(self,
                 {
-                    ...self, accessToken: token, authenticated: true 
+                    ...self, accessToken: token, authenticated 
                 });
         }
 
