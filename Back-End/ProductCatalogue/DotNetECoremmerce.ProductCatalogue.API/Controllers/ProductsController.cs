@@ -33,6 +33,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
 
         [EnableCors()]
         [HttpGet]
+        [Authorize("CanViewProducts")]
         public async Task<Product[]> GetAllProducts()
         {
             return await _context.Products.ToArrayAsync();
@@ -40,6 +41,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API.Controllers
 
         [EnableCors()]
         [HttpGet("{id}")]
+        [Authorize("CanViewProducts")]
         public async Task<Product> GetProductById(int id)
         {
             return await _context.Products.FindAsync(id);

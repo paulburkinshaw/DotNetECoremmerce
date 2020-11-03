@@ -95,6 +95,13 @@ namespace DotNetECoremmerce.ProductCatalogue.API
                         new ProductsAdminRequirement()
                     )
                 );
+
+                options.AddPolicy(
+                    "CanViewProducts",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new ViewProductsRequirement()
+                    )
+                );
             });
 
             services.AddSingleton<IAuthorizationHandler, ProductsAdminHandler>();
