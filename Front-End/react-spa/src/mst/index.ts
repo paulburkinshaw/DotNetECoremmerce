@@ -23,6 +23,10 @@ const AuthModel = types.model("Auth", {
                 });
         },
         setAuth(token: string, authenticated: boolean) {
+
+            const bearerToken = "Bearer " + token;
+            api.defaults.headers.common['Authorization'] = bearerToken;
+            
             applySnapshot(self,
                 {
                     ...self, accessToken: token, authenticated 
@@ -43,26 +47,21 @@ const ProductCatalogueModel = types.model("ProductCatalogue", {
     products: types.array(ProductModel)
 })
     .actions(self => {
-        function newProduct(name: string, description: string, category: string, price: number, bearerToken: string) {
+        function newProduct(name: string, description: string, category: string, price: number) {
             const id =0;
             applySnapshot(self,
                 {
                     ...self, products: [{ id, name, description, category, price }, ...self.products]
                 });
 
-            saveProduct({ id, name, description, category, price, }, bearerToken);
+            saveProduct({ id, name, description, category, price, });
         }
-        const saveProduct = flow(function* saveProduct(snapshot: any, bearerToken) {
+        const saveProduct = flow(function* saveProduct(snapshot: any) {
             let product_catalogue_api_url: string = process.env.REACT_APP_PRODUCT_CATOLOGUE_API_URL ? process.env.REACT_APP_PRODUCT_CATOLOGUE_API_URL : '';
 
             try {
 
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'Authorization': bearerToken
-                }
-
-                const response = yield api.post(product_catalogue_api_url, snapshot, { headers: headers });
+                const response = yield api.post(product_catalogue_api_url, snapshot);
 
             } catch (e) {
                 console.log('error:', e);

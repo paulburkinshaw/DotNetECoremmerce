@@ -64,8 +64,7 @@ class ProductCatalogueComponent extends React.Component<ProductCatalogueComponen
 
         if (!rootTree) return null;
 
-        const bearerToken = "Bearer " + rootTree.auth.accessToken;
-        rootTree.productCatalogue.newProduct(productName, productDescription, productCategory, parseInt(productPrice), bearerToken);
+        rootTree.productCatalogue.newProduct(productName, productDescription, productCategory, parseInt(productPrice));
         
         this.setState({productName: "", productDescription: "", productCategory: "", productPrice: ""})
 
