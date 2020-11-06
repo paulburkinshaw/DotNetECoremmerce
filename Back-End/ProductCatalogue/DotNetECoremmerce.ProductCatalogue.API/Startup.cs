@@ -105,6 +105,7 @@ namespace DotNetECoremmerce.ProductCatalogue.API
             });
 
             services.AddSingleton<IAuthorizationHandler, ProductsAdminHandler>();
+            services.AddSingleton<IAuthorizationHandler, ViewProductsHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
